@@ -2,7 +2,9 @@ module ALUcontrol(clk,funct,ALUOp,ALUsignal);
 input clk;
 input[5:0] funct;
 input[2:0] ALUOp;
+
 output[3:0] ALUsignal;
+
 reg[3:0] ALUsignal;
 always@(funct , ALUOp ,posedge clk)begin 
 	case(ALUOp)

@@ -1,4 +1,7 @@
-module ALU(input [31:0] data1,data2,input [3:0] aluoperation,output reg [31:0] result,output reg zero,lt,gt);
+module ALU(input [31:0] data1,data2,
+           input [3:0] aluoperation,
+           output reg [31:0] result,
+           output reg zero,lt,gt);
   always@(aluoperation,data1,data2)
   begin 
 	   case (aluoperation)

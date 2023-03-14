@@ -1,14 +1,17 @@
 module IMemBank(input memread, input [31:0] address, output reg [31:0] readdata);
  
-  reg [31:0] mem_array [255:0];
-  reg [31:0]temp;
+  reg [31:0] 	mem_array [255:0];
+  reg [31:0]	temp;
+
   integer i;
   initial begin
     for (i=11; i<255; i=i+1)   
 	begin
        	mem_array[i]=32'b0;
 	end
+
   end
+  
   always@(memread, address, mem_array[address])
   begin
     if(memread)begin
@@ -16,6 +19,8 @@ module IMemBank(input memread, input [31:0] address, output reg [31:0] readdata)
       readdata=mem_array[temp];
     end
     //////////////////////////////////////////////////////////////////////////////////////////////////////// test bench!
+	/* 添加相关代码用于验证检查，另一方面要注意这个是流水线*/
+	/* 基本策略，执行完十条指令后统一检查对应的执行结果即可 */
 	//lvl 1
 	/*mem_array[0]={6'b0,5'b10,5'b1,5'b11,5'b0,6'b100000};//add reg3,reg2,reg1 =30
 	mem_array[1]={6'b0,5'b10,5'b1,5'b100,5'b0,6'b100010};//sub reg4,reg2,reg1 =10
@@ -69,8 +74,6 @@ module IMemBank(input memread, input [31:0] address, output reg [31:0] readdata)
 
 	// mem_array[12]={6'b101011,5'b1010,5'b1011,16'b1};//sw reg11,1(reg10) =mem[31]<=0
 	// mem_array[13]={6'b100011,5'b1010,5'b1100,16'b01};//lw reg12,1(reg10) =reg[12]<=0
-
-
 /*
 	//r2=max , r3=min , r4=1 , r5=i , r6=adress , r7=current
 	mem_array[0]={6'b001000,5'b0,5'b10,16'b1010};//addi r2,r0,10
